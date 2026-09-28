@@ -5,7 +5,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://tiles.openfreemap.org; connect-src 'self' https://tiles.openfreemap.org https://json.geoapi.pt; worker-src 'self' blob:; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://tiles.openfreemap.org; connect-src 'self' https://tiles.openfreemap.org https://json.geoapi.pt; worker-src 'self' blob:; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -15,6 +15,15 @@
 
 /sw.js
   Cache-Control: no-cache
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+
+/404.html
+  X-Robots-Tag: noindex
 
 /manifest.webmanifest
   Cache-Control: public, max-age=3600

@@ -9,7 +9,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       // script externo em vez de inline: compatível com a CSP `script-src 'self'` (public/_headers)
       injectRegister: "script-defer",
-      includeAssets: ["icon.svg", "og.png", "robots.txt"],
+      includeAssets: ["icon.svg", "favicon.ico", "apple-touch-icon.png", "og.png", "robots.txt"],
       manifest: {
         name: "Convencionados — onde fazer o P1",
         short_name: "Convencionados",
@@ -20,7 +20,17 @@ export default defineConfig({
         background_color: "#f5f5f7",
         display: "standalone",
         start_url: "/",
-        icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
+        icons: [
+          { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+          { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+          { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+          {
+            src: "/icon-maskable-512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+        ],
       },
       workbox: {
         // o snapshot é grande: em cache com stale-while-revalidate, o resto do app precache

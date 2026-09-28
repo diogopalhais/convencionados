@@ -133,6 +133,12 @@ custom domains do Worker (a zona tem de estar na conta Cloudflare). O www serve 
 e o `canonical` aponta para o apex; para um 301 www → apex, criar uma Redirect Rule na zona
 (o `_redirects` dos Workers só aceita caminhos relativos, não hosts).
 
+- `worker/index.ts` corre à frente dos assets (`run_worker_first`): 301 de http:// e www para o
+  apex, barra final removida nas rotas da app, `index.html` só em `/`, `/p/:id`, `/qualidade` e
+  `/privacidade`, e `404.html` com estado 404 para o resto (sem soft 404).
+- Ficheiros para máquinas: `/.well-known/security.txt`, `/.well-known/api-catalog` (linkset para os
+  JSON), `/llms.txt`, `/humans.txt`; JSON-LD `WebSite` com `SearchAction` no `index.html`.
+  Auditoria de referência: https://specification.website/checklist/.
 - Manual: `pnpm --filter @sns-conv/web run deploy` (faz build e `wrangler deploy`; na primeira vez
   `pnpm exec wrangler login`). `deploy:dry` valida sem publicar.
 - Automático: `.github/workflows/deploy.yml` publica a cada push para `main` (inclui os merges dos
@@ -143,7 +149,8 @@ e o `canonical` aponta para o apex; para um 301 www → apex, criar uma Redirect
   gerado em `scripts/sync-data.mjs` com uma entrada por local (ignorado no git).
 - Email `contacto@convencionados.xyz`: ativar Cloudflare Email Routing na zona e reencaminhar
   para a caixa pessoal.
-- A CSP permite só: `self`, Google Fonts, `tiles.openfreemap.org` e `json.geoapi.pt`. Qualquer
+- A CSP permite só: `self`, `tiles.openfreemap.org` e `json.geoapi.pt` (a Geist é servida de
+  `public/fonts`, licença OFL incluída). Qualquer
   novo serviço externo tem de ser acrescentado em `_headers`. O registo do service worker é um
   script externo (`injectRegister: "script-defer"`) por causa de `script-src 'self'`.
 
@@ -153,7 +160,7 @@ e o `canonical` aponta para o apex; para um 301 www → apex, criar uma Redirect
   substitui-o por um pseudónimo estável `P` + 8 hex no fim da ingestão, depois dos cruzamentos por
   NIF. O schema aceita as duas formas (`Nif`), e a ficha omite o NIF quando é pseudónimo.
 - **Aviso de não oficialidade** no rodapé e na página `/privacidade`, que lista o que não recolhemos,
-  os terceiros que o navegador contacta (OpenFreeMap, Google Fonts, GEO API PT, Google Maps ao
+  os terceiros que o navegador contacta (OpenFreeMap, GEO API PT, Google Maps ao
   clicar), as fontes e o contacto.
 - **Erro de carregamento**: a página inicial e a ficha mostram uma caixa com "Tentar de novo" se o
   snapshot falhar; uma falha não fica em cache (`data.ts`).

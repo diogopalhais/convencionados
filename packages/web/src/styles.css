@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 /* Convencionados — sóbrio, tipografia em primeiro plano, claro por defeito com modo escuro opcional. */
 :root {
   color-scheme: light;
@@ -103,6 +117,25 @@ code,
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+/* skip link: invisível até receber foco pelo teclado */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+}
+main:focus {
+  outline: none;
 }
 :focus-visible {
   outline: 3px solid var(--accent);

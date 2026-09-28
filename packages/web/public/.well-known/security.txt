@@ -1,0 +1,5 @@
+Contact: mailto:contacto@convencionados.xyz
+Expires: 2027-09-28T00:00:00.000Z
+Preferred-Languages: pt, en
+Canonical: https://convencionados.xyz/.well-known/security.txt
+Policy: https://convencionados.xyz/privacidade

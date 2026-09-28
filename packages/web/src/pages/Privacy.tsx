@@ -47,10 +47,6 @@ export function Privacy() {
             imagens da zona que está a ver.
           </li>
           <li>
-            <b>Google Fonts</b> (fonts.googleapis.com, fonts.gstatic.com): fornece os tipos de
-            letra. Recebe um pedido em cada visita.
-          </li>
-          <li>
             <b>GEO API PT</b> (json.geoapi.pt): só quando escreve um código postal que não
             conseguimos localizar com os dados que já temos. Recebe o código postal, nada mais.
           </li>

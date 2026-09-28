@@ -58,6 +58,9 @@ export function Layout() {
     pref === "system" ? "a seguir o sistema" : pref === "light" ? "claro" : "escuro";
   return (
     <div className="app">
+      <a className="skip-link" href="#conteudo">
+        Saltar para o conteúdo
+      </a>
       <header className="topbar">
         <div className="topbar-inner">
           <NavLink to="/" className="brand">
@@ -91,7 +94,7 @@ export function Layout() {
           </button>
         </div>
       </header>
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <Outlet />
       </main>
       <footer className="footer">

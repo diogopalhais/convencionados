@@ -1,0 +1,12 @@
+/* EQUIPA */
+Projeto independente, feito em Portugal.
+Contacto: contacto@convencionados.xyz
+Código: https://github.com/diogopalhais/convencionados
+
+/* AGRADECIMENTOS */
+ACSS e SPMS (lista de convencionados), Portal da Transparência do SNS,
+Entidade Reguladora da Saúde, OpenFreeMap e OpenStreetMap, GEO API PT, Vercel (tipo de letra Geist).
+
+/* SITE */
+Última atualização dos dados: ver /qualidade
+Stack: TypeScript, React, Vite, MapLibre, MiniSearch, Cloudflare Workers

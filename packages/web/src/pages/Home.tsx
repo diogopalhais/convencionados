@@ -575,6 +575,7 @@ export function Home() {
             ))}
           </fieldset>
 
+          <h2 className="sr-only">Resultados da pesquisa</h2>
           <div className="toolbar">
             <span className="count" aria-live="polite" aria-atomic="true">
               {!index

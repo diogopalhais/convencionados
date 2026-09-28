@@ -1,0 +1,18 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://convencionados.xyz/",
+      "service-desc": [
+        { "href": "https://convencionados.xyz/llms.txt", "type": "text/plain", "title": "Descrição dos dados e da app" }
+      ],
+      "service-doc": [
+        { "href": "https://github.com/diogopalhais/convencionados#readme", "type": "text/html", "title": "Documentação (schema, fontes, ingestão)" }
+      ],
+      "item": [
+        { "href": "https://convencionados.xyz/data/latest.json", "type": "application/json", "title": "Snapshot: entidades, locais, convenções e sinais" },
+        { "href": "https://convencionados.xyz/data/mcdt-codes.json", "type": "application/json", "title": "Tabela de códigos MCDT do setor convencionado" },
+        { "href": "https://convencionados.xyz/data/report-latest.json", "type": "application/json", "title": "Relatório de qualidade do snapshot" }
+      ]
+    }
+  ]
+}

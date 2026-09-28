@@ -1,0 +1,23 @@
+# Convencionados
+
+> Onde fazer o seu P1: pesquisa de prestadores com convenção ativa com o SNS (Portugal) para exames e meios complementares de diagnóstico. Projeto independente; não é um serviço oficial do SNS, da ACSS ou da SPMS.
+
+A app corre no navegador a partir de um ficheiro JSON público, atualizado uma vez por mês a partir das fontes oficiais. Não há API com estado nem autenticação.
+
+## Dados (JSON, sem autenticação, CORS não necessário para leitura direta)
+
+- [Snapshot completo](https://convencionados.xyz/data/latest.json): `entities[]` (NIF ou pseudónimo, nome, reclamações ERS), `locations[]` (id, morada, coordenadas, contactos, `conventions[]` com área, âmbito, lista de exames e atividade, `signals[]`), `areas[]`, `source` (datas e origens). ~7 MB, brotli ~350 kB.
+- [Códigos MCDT](https://convencionados.xyz/data/mcdt-codes.json): código → área, descrição, preço convencionado.
+- [Relatório de qualidade](https://convencionados.xyz/data/report-latest.json): portas de qualidade, cobertura por campo, anomalias.
+- [Sitemap](https://convencionados.xyz/sitemap.xml): uma URL por local, `https://convencionados.xyz/p/{id}`.
+
+## Páginas
+
+- [Pesquisa](https://convencionados.xyz/): `?q=<exame ou código>&area=<códigos>&cp=<código postal>`.
+- [Ficha do prestador](https://convencionados.xyz/p/18395): exemplo.
+- [Qualidade dos dados](https://convencionados.xyz/qualidade)
+- [Privacidade, fontes e contacto](https://convencionados.xyz/privacidade)
+
+## Fontes e reutilização
+
+ACSS/SPMS (Rede de Prestadores Convencionados), Portal da Transparência do SNS, ERS (Reclamações em números), tabela MCDT da ACSS. Reutilização ao abrigo da Lei n.º 26/2016. Os dados derivados podem conter erros de cruzamento; em caso de dúvida vale a fonte original. O NIF de pessoas singulares não é publicado.
