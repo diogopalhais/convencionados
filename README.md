@@ -128,9 +128,10 @@ o conteúdo.
 
 Alojamento em **Cloudflare Workers com assets estáticos** (`packages/web/wrangler.jsonc`): o `dist`
 é servido como SPA (`not_found_handling: single-page-application`, por isso `/p/123` funciona em
-refresh), com `public/_headers` (CSP, HSTS, cache imutável em `/assets`, 1 h em `/data`) e
-`public/_redirects` (www → apex). Domínios: `convencionados.xyz` e `www.convencionados.xyz` como
-custom domains do Worker (a zona tem de estar na conta Cloudflare).
+refresh), com `public/_headers` (CSP, HSTS, cache imutável em `/assets`, 1 h em `/data`). Domínios: `convencionados.xyz` e `www.convencionados.xyz` como
+custom domains do Worker (a zona tem de estar na conta Cloudflare). O www serve o mesmo conteúdo
+e o `canonical` aponta para o apex; para um 301 www → apex, criar uma Redirect Rule na zona
+(o `_redirects` dos Workers só aceita caminhos relativos, não hosts).
 
 - Manual: `pnpm --filter @sns-conv/web run deploy` (faz build e `wrangler deploy`; na primeira vez
   `pnpm exec wrangler login`). `deploy:dry` valida sem publicar.
