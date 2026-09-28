@@ -1,0 +1,51 @@
+name: ingest-sdm
+
+on:
+  schedule:
+    - cron: "0 3 5 * *" # dia 5 de cada mês, 03:00 UTC; as fontes mudam devagar (SDM lento, Transparência mensal com 3 meses de atraso, ERS semestral)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Ingestão live do SDM
+        id: ingest
+        run: pnpm run ingest:live
+        continue-on-error: true
+      - name: Abrir PR com o novo snapshot
+        if: steps.ingest.outcome == 'success'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: |
+            data/latest.json
+            data/report-*.json
+            data/report-*.md
+            data/mcdt-codes.json
+          commit-message: "data: snapshot SDM ${{ github.run_started_at }}"
+          branch: data/snapshot
+          title: "Snapshot mensal dos dados"
+          body: "Snapshot gerado pela ingestão mensal (ou manual). Ver `data/report-latest.json` para as portas de qualidade."
+      - name: Alertar em caso de falha
+        if: steps.ingest.outcome != 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          echo "Ingestão falhou; latest.json não foi alterado."
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -s -X POST -H 'Content-type: application/json' \
+              --data "{\"text\":\"sns-conv: ingestão SDM falhou (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\"}" \
+              "$SLACK_WEBHOOK"
+          fi
+          exit 1

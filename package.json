@@ -1,0 +1,20 @@
+{
+  "name": "sns-conv",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Onde fazer um P1 num prestador convencionado com o SNS",
+  "packageManager": "pnpm@10.29.3",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "ingest:fixture": "pnpm --filter @sns-conv/ingest run ingest -- --fixture fixtures/sdm-2026-09-24.html.gz --out ../../data",
+    "ingest:live": "pnpm --filter @sns-conv/ingest run ingest -- --live --out ../../data",
+    "web": "pnpm --filter @sns-conv/web run dev"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "typescript": "^5.9.0"
+  }
+}

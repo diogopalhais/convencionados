@@ -1,0 +1,34 @@
+name: deploy
+
+# Publica em https://convencionados.xyz (Cloudflare Workers com assets estáticos)
+# a cada push para main, incluindo os merges dos PRs de snapshot mensal.
+# Segredos necessários no repositório: CLOUDFLARE_API_TOKEN (permissão "Workers Scripts: Edit"
+# e "Workers Routes: Edit" na zona), CLOUDFLARE_ACCOUNT_ID.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @sns-conv/web build
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: packages/web
+          command: deploy

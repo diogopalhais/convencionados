@@ -1,0 +1,16 @@
+{
+  // Cloudflare Workers com assets estáticos (SPA). Deploy: pnpm run deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "convencionados",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [
+    { "pattern": "convencionados.xyz", "custom_domain": true },
+    { "pattern": "www.convencionados.xyz", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

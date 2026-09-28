@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+packages/web/public/data/
+packages/ingest/.cache/
+data/raw/
+.env
+.env.*
+.wrangler/
+packages/web/public/sitemap.xml
+# o snapshot datado duplica latest.json (7 MB/mês); o histórico fica no git de latest.json
+data/snapshot-*.json
